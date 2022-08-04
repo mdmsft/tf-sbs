@@ -1,3 +1,3 @@
 locals {
-  introduction = "${var.name} is ${var.age} years old"
+  resource_suffix = "${var.project}-${var.environment}-${var.location.code}"
 }

@@ -1,8 +1,7 @@
-output "introduction" {
-  value = "${local.introduction} and ${var.likes_terraform ? "likes" : "doesn't like"} Terraform"
+output "client_config_client_id" {
+  value = data.azurerm_client_config.current.client_id
 }
 
-output "password" {
-  value     = "Password: ${var.password}"
-  sensitive = true
+output "client_config_object_id" {
+  value = data.azurerm_client_config.current.object_id
 }
