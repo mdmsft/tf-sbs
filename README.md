@@ -56,3 +56,15 @@ lifecycle {
 $env:TF_VAR_project="fabrikam"
 terraform plan -out main.tfplan -var-file azure.tfvars
 ```
+### Migrate local state to remote backend
+```sh
+terraform init \
+    -backend-config="tenant_id=..." \
+    -backend-config="subscription_id=..." \
+    -backend-config="resource_group_name=..." \
+    -backend-config="storage_account_name=..." \
+    -backend-config="container_name=..." \
+    -backend-config="key=..." \
+    -backend-config="client_id=..." \
+    -backend-config="client_secret=..."
+```
