@@ -68,3 +68,11 @@ terraform init \
     -backend-config="client_id=..." \
     -backend-config="client_secret=..."
 ```
+### Use modules
+```sh
+terraform init
+```
+### Use workspace
+```sh
+terraform workspace new int
+```

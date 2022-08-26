@@ -4,6 +4,10 @@ terraform {
       source  = "hashicorp/azurerm"
       version = "~>3.19.0"
     }
+    random = {
+      source  = "hashicorp/random"
+      version = "~>3.3.0"
+    }
   }
   backend "azurerm" {
   }
@@ -24,7 +28,7 @@ resource "azurerm_resource_group" "main" {
   location = var.location.name
   tags = {
     project     = var.project
-    environment = var.environment
+    environment = terraform.workspace
   }
 
   lifecycle {}
@@ -41,3 +45,20 @@ resource "azurerm_resource_group" "main" {
 #     key                  = var.remote_state_key
 #   }
 # }
+
+resource "random_string" "random" {
+  length  = 8
+  special = false
+  numeric = false
+  upper   = false
+}
+
+module "storage" {
+  source              = "./modules/storage"
+  name                = random_string.random.result
+  resource_group_name = azurerm_resource_group.main.name
+
+  depends_on = [
+    azurerm_resource_group.main
+  ]
+}

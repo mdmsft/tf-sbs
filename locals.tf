@@ -1,3 +1,3 @@
 locals {
-  resource_suffix = "${var.project}-${var.environment}-${var.location.code}"
+  resource_suffix = "${var.project}-${terraform.workspace == "default" ? "dev" : terraform.workspace}-${var.location.code}"
 }
